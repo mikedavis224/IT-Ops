@@ -26,6 +26,9 @@ function Connect-ExchangeOnlineIfNeeded {
     }
 }
 
+#import modules
+import-module azureAD
+
 # Function to convert a user's mailbox to a shared mailbox
 function Convert-MailboxToShared {
     param (
