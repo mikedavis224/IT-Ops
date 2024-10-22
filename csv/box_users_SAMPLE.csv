@@ -1,0 +1,3 @@
+﻿Name,Email,Storage,"Shared Contacts",Sync,"Restrict external collaboration","Device pinning",Language,Groups
+Joe,joe@example.com,15,no,no,yes,yes,en-US,Marketing;Finance;Accounting
+Jack,jack@example.com,unlimited,yes,no,yes,no,pl-PL,Engineering

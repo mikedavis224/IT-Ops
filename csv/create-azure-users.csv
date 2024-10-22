@@ -1,0 +1,3 @@
+﻿version:v1.0,,,,,,,,,,
+Name [displayName] Required,User name [userPrincipalName] Required,Initial password [passwordProfile] Required,Block sign in (Yes/No) [accountEnabled] Required,First name [givenName],Last name [surname],Job title [jobTitle],Department [department],Usage location [usageLocation],Country or region [country],Mobile phone [mobile]
+Chad Haga,chad.haga@energixrenewables.com,#ChangeMe2Day!,No,Chad,Haga,Treasury Analyst,Finance,United States,US,7035985468
