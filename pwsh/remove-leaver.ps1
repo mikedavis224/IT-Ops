@@ -177,7 +177,7 @@ function Remove-Leaver {
         # Call functions
         Connect-ExchangeOnlineIfNeeded
         Convert-MailboxToShared -Leaver $leaver
-        #Send-MailToManager -Leaver $leaver -Manager $manager
+        Send-MailToManager -Leaver $leaver -Manager $manager
         Set-AutoReplyForLeaver -Leaver $leaver -Manager $manager -LeaveDate $leaveDate
         Remove-UserFromGroups -Leaver $leaver
         Remove-UserCalendarEvents -Leaver $leaver
