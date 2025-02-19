@@ -18,3 +18,27 @@ $enabledUsers = Get-MgUser -Filter "AccountEnabled eq true" -All | Where-Object 
 $enabledUsers | Select-Object DisplayName, UserPrincipalName, Mail, Id | Export-Csv -Path "C:\Export\AIR\EnabledUsers_Last60Days.csv" -NoTypeInformation
 
 Write-Host "Export complete. File saved to C:\Export\AIR\EnabledUsers_Last60Days.csv"
+
+## User Authentication and Sign-ins
+
+# Get active users who have not logged in for 90 days or more
+$thresholdDate = (Get-Date).AddDays(-90).ToString("yyyy-MM-ddTHH:mm:ssZ")
+$allUsers = Get-MgUser -Filter "AccountEnabled eq true" -All
+$inactiveUsers = @()
+
+foreach ($user in $allUsers) {
+    $lastSignIn = Get-MgAuditLogSignIn -Filter "UserPrincipalName eq '$($user.UserPrincipalName)'" | Sort-Object CreatedDateTime -Descending | Select-Object -First 1 CreatedDateTime
+    
+    if ($lastSignIn -eq $null -or $lastSignIn.CreatedDateTime -lt $thresholdDate) {
+        $inactiveUsers += [PSCustomObject]@{
+            DisplayName = $user.DisplayName
+            UserPrincipalName = $user.UserPrincipalName
+            LastSignInDate = if ($lastSignIn -ne $null) { $lastSignIn.CreatedDateTime } else { "Never Signed In" }
+        }
+    }
+}
+
+# Export inactive users to CSV
+$inactiveUsers | Export-Csv -Path "C:\Users\InactiveUsers_Last90Days.csv" -NoTypeInformation
+
+Write-Host "Export complete. File saved to C:\Users\InactiveUsers_Last90Days.csv"
